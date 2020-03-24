@@ -1,5 +1,6 @@
 package com.jwgrant.ppmtool.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,9 +25,13 @@ public class Project
     private String projectIdentifier;
     @NotBlank(message = "Description Required")
     private String description;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updatedAt;
 
 
