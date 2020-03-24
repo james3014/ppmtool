@@ -1,5 +1,6 @@
 package com.jwgrant.ppmtool.service;
 
+import com.jwgrant.ppmtool.exception.ProjectIdException;
 import com.jwgrant.ppmtool.model.Project;
 import com.jwgrant.ppmtool.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,15 @@ public class ProjectService
 
     public void save(Project project)
     {
-        projectRepository.save(project);
+        try
+        {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            projectRepository.save(project);
+        }
+        catch (Exception e)
+        {
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase()
+                    + " ' already exists");
+        }
     }
-
 }
