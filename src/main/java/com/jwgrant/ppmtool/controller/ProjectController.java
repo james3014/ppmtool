@@ -6,10 +6,7 @@ import com.jwgrant.ppmtool.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,5 +31,12 @@ public class ProjectController
         if (errors != null) return errors;
         projectService.save(project);
         return new ResponseEntity<>(project, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId)
+    {
+        Project project = projectService.findByProjectIdentifier(projectId);
+        return new ResponseEntity<>(project, HttpStatus.OK);
     }
 }

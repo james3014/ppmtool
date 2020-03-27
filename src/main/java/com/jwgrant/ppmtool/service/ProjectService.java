@@ -28,4 +28,13 @@ public class ProjectService
                     + " ' already exists");
         }
     }
+
+    public Project findByProjectIdentifier(String projectId)
+    {
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+
+        if (project == null) throw new ProjectIdException("Project ID does not exist");
+
+        return project;
+    }
 }
